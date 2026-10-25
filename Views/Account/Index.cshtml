@@ -1,0 +1,91 @@
+@model List<wt_lab4_4mvc_vinnik.Models.Account>
+
+@{
+    ViewData["Title"] = "Банковские счета";
+}
+
+<div class="container py-4">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">
+            Банковские счета
+        </h1>
+
+        <p class="text-muted">
+            Система управления банковскими счетами
+        </p>
+
+        <p>Всего счетов: @Model.Count</p>
+        
+<div class="mt-4">
+    <a asp-controller="Account"
+       asp-action="Create"
+       class="btn btn-primary btn-lg">
+        + Добавить счёт
+    </a>
+</div>
+
+    </div>
+
+    <div class="row g-4">
+        @foreach (var account in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+
+                        <span class="badge bg-primary mb-3">
+                            @account.AccountType
+                        </span>
+
+                        <h4 class="card-title">
+                            @account.Owner
+                        </h4>
+
+                        <p class="text-muted">
+                            Номер счёта: @account.AccountNumber
+                        </p>
+
+                        <h3 class="text-primary fw-bold my-3">
+                            @account.Balance.ToString("N2") руб.
+                        </h3>
+
+                        @if (account.IsActive)
+                        {
+                            <span class="badge bg-success">
+                                Активен
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">
+                                Неактивен
+                            </span>
+                        }
+
+                        
+                        <div class="mt-4 d-grid gap-2">
+
+                            <a asp-controller="Account"
+                            asp-action="Details"
+                            asp-route-id="@account.Id"
+                            class="btn btn-outline-primary">
+                                Подробнее
+                            </a>
+
+                            <a asp-controller="Account"
+                            asp-action="Edit"
+                            asp-route-id="@account.Id"
+                            class="btn btn-primary">
+                                Редактировать
+                            </a>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

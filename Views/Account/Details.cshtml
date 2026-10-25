@@ -1,0 +1,60 @@
+@model wt_lab4_4mvc_vinnik.Models.Account
+
+@{
+    ViewData["Title"] = "Информация о счёте";
+}
+
+<div class="container py-5">
+
+    <h1 class="text-primary fw-bold mb-4">
+        Информация о банковском счёте
+    </h1>
+
+    <div class="card shadow-sm rounded-4">
+        <div class="card-body p-4">
+
+            <h3 class="mb-4">@Model.Owner</h3>
+
+            <p><strong>ID:</strong> @Model.Id</p>
+
+            <p>
+                <strong>Номер счёта:</strong>
+                @Model.AccountNumber
+            </p>
+
+            <p>
+                <strong>Тип счёта:</strong>
+                @Model.AccountType
+            </p>
+
+            <p>
+                <strong>Баланс:</strong>
+                @Model.Balance.ToString("N2") руб.
+            </p>
+
+            <p>
+                <strong>Статус:</strong>
+
+                @if (Model.IsActive)
+                {
+                    <span class="badge bg-success">
+                        Активен
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">
+                        Неактивен
+                    </span>
+                }
+            </p>
+
+            <a asp-controller="Account"
+               asp-action="Index"
+               class="btn btn-primary mt-3">
+                Назад к списку
+            </a>
+
+        </div>
+    </div>
+</div>
